@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/audiocare/api/admins")
@@ -52,6 +53,14 @@ public class AdminController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         adminService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<Void> changePassword(
+            @PathVariable Integer id,
+            @RequestBody Map<String, String> request) {
+        adminService.changePassword(id, request.get("currentPassword"), request.get("newPassword"));
         return ResponseEntity.noContent().build();
     }
 }

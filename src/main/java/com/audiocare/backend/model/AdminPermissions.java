@@ -1,5 +1,6 @@
 package com.audiocare.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class AdminPermissions {
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id", nullable = false)
+    @JsonIgnore
     private Admin admin;
 
     // Módulo: model_product
