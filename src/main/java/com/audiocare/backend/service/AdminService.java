@@ -154,4 +154,16 @@ public class AdminService {
         return adminRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Admin no encontrado con id: " + id));
     }
+
+    @Transactional
+    public void changePassword(Integer id, String currentPassword, String newPassword) {
+        Admin admin = findAdminOrThrow(id);
+
+        if (!passwordEncoder.matches(currentPassword, admin.getPassHash())) {
+            throw new IllegalArgumentException("La contraseña actual es incorrecta");
+        }
+
+        admin.setPassHash(passwordEncoder.encode(newPassword));
+        adminRepository.save(admin);
+    }
 }

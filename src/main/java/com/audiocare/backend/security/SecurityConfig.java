@@ -29,12 +29,15 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .cors(cors -> {})
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/audiocare/api/auth/login").permitAll()
-                .requestMatchers("/audiocare/api/models").permitAll()
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .anyRequest().authenticated()
-            )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/audiocare/api/auth/login").permitAll()
+                        .requestMatchers("/audiocare/api/models").permitAll()
+                        // ── DEV ONLY — quitar antes de producción ──
+                        .requestMatchers(HttpMethod.POST, "/audiocare/api/admins").permitAll()
+                        // ─────────────────────────────────────────────
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .anyRequest().authenticated()
+                )
             // API REST stateless: sin sesión HTTP.
             .sessionManagement(session ->
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -1,6 +1,7 @@
 package com.audiocare.backend.model;
 
 import com.audiocare.backend.model.enums.ProductStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 )
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
     @Id
