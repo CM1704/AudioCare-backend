@@ -31,8 +31,10 @@ public class AuthService {
         return LoginResponse.builder()
                 .token(token)
                 .adminId(admin.getId())
+                .identityNumber(admin.getIdentityNumber())
                 .name(admin.getName())
                 .lastName1(admin.getLastName1())
+                .lastName2(admin.getLastName2())
                 .email(admin.getEmail())
                 .isMaster(admin.getIsMaster())
                 // Master no tiene fila en admin_permissions (acceso total implícito).

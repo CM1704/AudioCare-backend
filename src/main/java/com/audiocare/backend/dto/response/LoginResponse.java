@@ -10,8 +10,10 @@ import lombok.Setter;
 public class LoginResponse {
     private String token;
     private Integer adminId;
+    private String identityNumber;
     private String name;
     private String lastName1;
+    private String lastName2;
     private String email;
     private Boolean isMaster;
     // Permisos incluidos en el login para que el front pueda
